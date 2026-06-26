@@ -68,7 +68,7 @@ python3 -m http.server 8000
 | DOI | https://doi.org/10.20944/preprints202405.1003.v1 |
 | Code | https://github.com/generible/Inverted-Pendulum-Simulator |
 | Video | YouTube playlist: **TODO**, search `YOUTUBE_PLAYLIST_URL` in index.html |
-| Schedule | Calendly: **TODO**, search `CALENDLY_EVENT_URL` in index.html |
+| Schedule | https://calendar.app.google/9djYm5daK8n7TC3VA |
 | Discussion | https://github.com/genepatrickrible/inverted-pendulum/discussions |
 
 ## Integrations
@@ -79,9 +79,9 @@ python3 -m http.server 8000
   the supplementary-videos grid) with the 11-character video ID. Upload the
   videos **Public** (not Unlisted) so Scholar and video crawlers index them, and
   set `YOUTUBE_PLAYLIST_URL` (two places) to the public playlist.
-- **Schedule button (Calendly):** `CALENDLY_EVENT_URL` in `index.html` holds the
-  Calendly event link (e.g. `https://calendly.com/your-name/30min`). Remove the
-  `is-placeholder-link` class once set.
+- **Schedule button:** points at the Google Calendar Appointment Scheduling page
+  `https://calendar.app.google/9djYm5daK8n7TC3VA` (same booking link as the
+  fur-wetting and quadcopter-failsafe pages).
 - **Giscus comments:** already wired in the `#discussion` section (very bottom)
   for `genepatrickrible/inverted-pendulum`, Announcements category
   (`data-repo-id=R_kgDOTGRcWg`, `data-category-id=DIC_kwDOTGRcWs4C_9IY`,
