@@ -68,7 +68,7 @@ python3 -m http.server 8000
 | DOI | https://doi.org/10.20944/preprints202405.1003.v1 |
 | Code | https://github.com/generible/Inverted-Pendulum-Simulator |
 | Video | YouTube playlist: **TODO**, search `YOUTUBE_PLAYLIST_URL` in index.html |
-| Schedule | booking page: **TODO**, search `BOOKING_URL_PLACEHOLDER` in index.html |
+| Schedule | Calendly: **TODO**, search `CALENDLY_EVENT_URL` in index.html |
 | Discussion | https://github.com/genepatrickrible/inverted-pendulum/discussions |
 
 ## Integrations
@@ -79,13 +79,15 @@ python3 -m http.server 8000
   the supplementary-videos grid) with the 11-character video ID. Upload the
   videos **Public** (not Unlisted) so Scholar and video crawlers index them, and
   set `YOUTUBE_PLAYLIST_URL` (two places) to the public playlist.
-- **Schedule button:** `BOOKING_URL_PLACEHOLDER` in `index.html` holds the
-  booking-page URL (Google Appointments / Calendly / Cal.com). Remove the
+- **Schedule button (Calendly):** `CALENDLY_EVENT_URL` in `index.html` holds the
+  Calendly event link (e.g. `https://calendly.com/your-name/30min`). Remove the
   `is-placeholder-link` class once set.
-- **Giscus comments:** configure at https://giscus.app for the
-  `genepatrickrible/inverted-pendulum` repo (enable Discussions, install the Giscus app,
-  category **Announcements**), then paste the generated `<script>` block into the
-  `#discussion` section (keep `data-loading="lazy"`).
+- **Giscus comments:** already wired in the `#discussion` section (very bottom)
+  for `genepatrickrible/inverted-pendulum`, Announcements category
+  (`data-repo-id=R_kgDOTGRcWg`, `data-category-id=DIC_kwDOTGRcWs4C_9IY`,
+  `data-mapping=pathname`, `data-loading=lazy`). Discussions are enabled on the
+  repo; the widget renders once the **Giscus GitHub App** is installed on this
+  repo at https://github.com/apps/giscus.
 
 ## SEO
 

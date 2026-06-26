@@ -161,6 +161,19 @@ html { scroll-behavior: smooth; }
   border: 0;
 }
 
+/* Video drop-in placeholder: labeled dashed box shown until a YouTube ID is set. */
+.video-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #5a6573;
+  color: #cdd3db;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+.video-placeholder::after { content: attr(data-movie); }
+
 /* ----- BibTeX ----- */
 pre.bibtex {
   background: #1f2430;

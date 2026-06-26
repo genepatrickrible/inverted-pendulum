@@ -100,7 +100,7 @@
 
           <h1 class="title is-2 publication-title">Nonlinear Swing-Up and Stabilization of an Inverted Pendulum on a Cart</h1>
 
-          <p class="subtitle is-5 tagline">Energy control with multiple Lyapunov functions, sliding mode control, and pole placement, plus an open-source MATLAB simulator.</p>
+          <p class="subtitle is-5 tagline">Energy control with multiple Lyapunov functions, sliding mode control, and pole placement, plus an open-source MATLAB simulator</p>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block">Gene Patrick Rible<sup>*</sup></span>
@@ -109,8 +109,7 @@
           <div class="is-size-6 publication-affiliations">
             <span class="affil-block">Department of Mechanical, Aerospace and Biomedical Engineering, University of Tennessee, Knoxville, TN 37916, USA</span>
             <br>
-            <sup>*</sup>&nbsp;Corresponding author:
-            <a href="mailto:grible@vols.utk.edu">grible@vols.utk.edu</a>
+            <sup>*</sup>&nbsp;<em>Contact: <a href="mailto:grible@vols.utk.edu" style="text-decoration: underline;">grible@vols.utk.edu</a></em>
           </div>
 
           <!-- Journal badge, clickable, links to DOI -->
@@ -172,8 +171,8 @@
           <!-- Engagement row: kept separate so it does not wrap with the paper buttons -->
           <div class="publication-links engagement-links">
             <span class="link-block">
-              <!-- TODO(link): replace with your booking-page URL (Google Appointments / Calendly / Cal.com). -->
-              <a href="BOOKING_URL_PLACEHOLDER" class="button is-dark is-rounded is-placeholder-link" target="_blank" rel="noopener">
+              <!-- TODO(link): replace CALENDLY_EVENT_URL with your Calendly event link, e.g. https://calendly.com/your-name/30min -->
+              <a href="CALENDLY_EVENT_URL" class="button is-dark is-rounded is-placeholder-link" target="_blank" rel="noopener">
                 <span class="icon"><i class="fas fa-calendar-check"></i></span><span>Schedule</span>
               </a>
             </span>
@@ -195,7 +194,7 @@
   <div class="container is-max-desktop">
     <!-- TODO(media): drop the looping swing-up clip at static/images/teaser.gif
          (a GIF or MP4 frame export works). Until then a dashed placeholder shows. -->
-    <figure class="image teaser-figure" data-file="static/images/teaser.gif">
+    <figure class="image teaser-figure" data-file="Hero teaser clip → static/images/teaser.gif">
       <img src="static/images/teaser.gif"
            alt="A cart-pole system swinging an inverted rod up to the vertical and balancing it."
            onerror="this.parentNode.classList.add('fig-missing')">
@@ -224,9 +223,6 @@
 <section class="section has-background-light">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">What this work contributes</h2>
-    <p class="subtitle is-6 has-text-centered firsts-sub">
-      The ideas that distinguish this treatment of the cart-pole. Click a card to jump to the details.
-    </p>
     <div class="columns is-multiline">
 
       <div class="column is-half">
@@ -269,7 +265,7 @@
         </a>
       </div>
 
-      <div class="column is-half">
+      <div class="column is-half is-offset-one-quarter">
         <a class="first-card-link" href="#section-techniques">
           <div class="first-card">
             <span class="icon has-text-info"><i class="fas fa-code fa-lg"></i></span>
@@ -293,14 +289,14 @@
       <h3 class="title is-4">The cart-pole system and its equilibria</h3>
       <div class="columns is-vcentered figure-pair">
         <div class="column">
-          <figure class="image" data-file="static/images/fig1-equilibria.png">
+          <figure class="image" data-file="Preprint Fig. 1 → static/images/fig1-equilibria.png">
             <img src="static/images/fig1-equilibria.png"
                  alt="Figure 1: upright, falling, and downward equilibrium configurations of the inverted pendulum on a cart."
                  onerror="this.parentNode.classList.add('fig-missing')">
           </figure>
         </div>
         <div class="column">
-          <figure class="image" data-file="static/images/fig2-schematic.png">
+          <figure class="image" data-file="Preprint Fig. 2 → static/images/fig2-schematic.png">
             <img src="static/images/fig2-schematic.png"
                  alt="Figure 2: schematic of the cart-pole with rod angle theta and cart position x driven by force F."
                  onerror="this.parentNode.classList.add('fig-missing')">
@@ -315,14 +311,14 @@
       <h3 class="title is-4">Energy-based swing-up with multiple Lyapunov functions</h3>
       <div class="columns is-vcentered figure-pair">
         <div class="column">
-          <figure class="image" data-file="static/images/fig3-energy-zero.png">
+          <figure class="image" data-file="Preprint Fig. 3 → static/images/fig3-energy-zero.png">
             <img src="static/images/fig3-energy-zero.png"
                  alt="Figure 3: the set of rod angle and angular velocity values that all produce zero mechanical energy."
                  onerror="this.parentNode.classList.add('fig-missing')">
           </figure>
         </div>
         <div class="column">
-          <figure class="image" data-file="static/images/fig4-swingup-cases.png">
+          <figure class="image" data-file="Preprint Fig. 4 → static/images/fig4-swingup-cases.png">
             <img src="static/images/fig4-swingup-cases.png"
                  alt="Figure 4: the two rod configurations where a single energy-based Lyapunov function fails to decrease."
                  onerror="this.parentNode.classList.add('fig-missing')">
@@ -335,7 +331,7 @@
     <!-- 3. Down controller / global stability -->
     <div class="result-block" id="section-global">
       <h3 class="title is-4">Forcing global stability from the downward equilibrium</h3>
-      <figure class="image" data-file="static/images/fig5-phi-angle.png">
+      <figure class="image" data-file="Preprint Fig. 5 → static/images/fig5-phi-angle.png">
         <img src="static/images/fig5-phi-angle.png"
              alt="Figure 5: the rod angle phi measured from the downward equilibrium, used by the down-stabilization controller."
              onerror="this.parentNode.classList.add('fig-missing')">
@@ -353,12 +349,8 @@
     <div class="result-block" id="section-results-rest">
       <h3 class="title is-4">Result: balancing in a single swing from rest</h3>
       <!-- TODO(video): Movies 1 and 2 (single Lyapunov and switching) for this case. -->
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE1" title="Movie 1: single Lyapunov controller, swing-up from rest"
-                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-      </div>
-      <figure class="image" data-file="static/images/fig6-results-rest.png">
+      <div class="video-embed video-placeholder" data-movie="Movie 1: paste YouTube ID (YOUTUBE_ID_MOVIE1)"></div>
+      <figure class="image" data-file="Preprint Fig. 6 → static/images/fig6-results-rest.png">
         <img src="static/images/fig6-results-rest.png"
              alt="Figure 6: input, cart force, cart position, and rod angle responses for the swing-up from rest, comparing single Lyapunov and switching controllers."
              onerror="this.parentNode.classList.add('fig-missing')">
@@ -370,12 +362,8 @@
     <div class="result-block" id="section-results-fastspin">
       <h3 class="title is-4">Result: recovering from a fast initial spin</h3>
       <!-- TODO(video): Movies 3 and 4 (single Lyapunov and switching) for this case. -->
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE3" title="Movie 3: single Lyapunov controller, recovery from a fast initial spin"
-                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-      </div>
-      <figure class="image" data-file="static/images/fig7-results-fastspin.png">
+      <div class="video-embed video-placeholder" data-movie="Movie 3: paste YouTube ID (YOUTUBE_ID_MOVIE3)"></div>
+      <figure class="image" data-file="Preprint Fig. 7 → static/images/fig7-results-fastspin.png">
         <img src="static/images/fig7-results-fastspin.png"
              alt="Figure 7: responses when the rod starts with a large angle and a fast spin, comparing single Lyapunov and switching controllers."
              onerror="this.parentNode.classList.add('fig-missing')">
@@ -387,12 +375,8 @@
     <div class="result-block" id="section-results-far">
       <h3 class="title is-4">Result: global stabilization from far-from-equilibrium states</h3>
       <!-- TODO(video): Movie 5 (switching controller) for this case. -->
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE5" title="Movie 5: switching controller, global stabilization from a far-from-equilibrium state"
-                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-      </div>
-      <figure class="image" data-file="static/images/fig8-results-far.png">
+      <div class="video-embed video-placeholder" data-movie="Movie 5: paste YouTube ID (YOUTUBE_ID_MOVIE5)"></div>
+      <figure class="image" data-file="Preprint Fig. 8 → static/images/fig8-results-far.png">
         <img src="static/images/fig8-results-far.png"
              alt="Figure 8: responses of the switching controller when the system starts far from any equilibrium."
              onerror="this.parentNode.classList.add('fig-missing')">
@@ -403,7 +387,7 @@
     <!-- 8. Techniques / architecture -->
     <div class="result-block" id="section-techniques">
       <h3 class="title is-4">Controller architecture and extensions</h3>
-      <figure class="image" data-file="static/images/fig9-flowchart.png">
+      <figure class="image" data-file="Preprint Fig. 9 → static/images/fig9-flowchart.png">
         <img src="static/images/fig9-flowchart.png"
              alt="Figure 9: flowchart of the optional controller techniques, from re-initializer through conditional switchers, accelerator, bounder, and input limiter."
              onerror="this.parentNode.classList.add('fig-missing')">
@@ -419,58 +403,38 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Supplementary videos</h2>
     <p class="subtitle is-6 has-text-centered firsts-sub">
-      Animations of the simulated cart-pole under each controller and initial condition.
+      Animations of the simulated cart-pole under each controller and initial condition
       <!-- TODO(video): replace each YOUTUBE_ID_MOVIEn with the 11-character YouTube ID. -->
     </p>
     <div class="columns is-multiline">
 
       <div class="column is-half">
         <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 1: swing-up from rest, single Lyapunov</h3>
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE1" title="Movie 1"
-                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-        </div>
+        <div class="video-embed video-placeholder" data-movie="Movie 1: paste YouTube ID (YOUTUBE_ID_MOVIE1)"></div>
         <p class="has-text-centered is-size-7">Rod hanging at rest, single Lyapunov controller.</p>
       </div>
 
       <div class="column is-half">
         <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 2: swing-up from rest, switching</h3>
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE2" title="Movie 2"
-                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-        </div>
+        <div class="video-embed video-placeholder" data-movie="Movie 2: paste YouTube ID (YOUTUBE_ID_MOVIE2)"></div>
         <p class="has-text-centered is-size-7">Rod hanging at rest, Lyapunov switching controller.</p>
       </div>
 
       <div class="column is-half">
         <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 3: fast initial spin, single Lyapunov</h3>
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE3" title="Movie 3"
-                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-        </div>
+        <div class="video-embed video-placeholder" data-movie="Movie 3: paste YouTube ID (YOUTUBE_ID_MOVIE3)"></div>
         <p class="has-text-centered is-size-7">Large angle and fast spin, single Lyapunov controller (drifts).</p>
       </div>
 
       <div class="column is-half">
         <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 4: fast initial spin, switching</h3>
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE4" title="Movie 4"
-                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-        </div>
+        <div class="video-embed video-placeholder" data-movie="Movie 4: paste YouTube ID (YOUTUBE_ID_MOVIE4)"></div>
         <p class="has-text-centered is-size-7">Large angle and fast spin, switching controller (one swing).</p>
       </div>
 
       <div class="column is-half is-offset-one-quarter">
         <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 5: far-from-equilibrium, switching</h3>
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE5" title="Movie 5"
-                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-        </div>
+        <div class="video-embed video-placeholder" data-movie="Movie 5: paste YouTube ID (YOUTUBE_ID_MOVIE5)"></div>
         <p class="has-text-centered is-size-7">Far-from-equilibrium start, switching controller.</p>
       </div>
 
@@ -504,32 +468,43 @@
   </div>
 </section>
 
-<!-- ============================== DISCUSSION ============================== -->
+<!-- ============================== CODE AND CONTRIBUTIONS ============================== -->
+<section class="section has-background-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4 has-text-centered">Code and contributions</h2>
+    <div class="content has-text-centered">
+      <p>The open-source MATLAB simulation code accompanying this work is available on
+        <a href="https://github.com/generible/Inverted-Pendulum-Simulator" target="_blank" rel="noopener">GitHub</a>.
+        Comments, issues, and contributions are welcome.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== DISCUSSION (Giscus, very bottom) ============================== -->
 <section class="section" id="discussion">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Discussion</h2>
     <p class="subtitle is-6 has-text-centered firsts-sub">
       Questions, comments, and follow-up work in the control and robotics community. Sign in with GitHub to post.
     </p>
-    <!-- TODO(giscus): configure at https://giscus.app for the genepatrickrible/inverted-pendulum repo
-         (enable Discussions on the repo, install the Giscus app, category = Announcements),
-         then paste the generated <script src="https://giscus.app/client.js" ...> block here.
-         Keep data-loading="lazy" since this widget sits near the bottom of the page. -->
-    <div class="has-text-centered has-text-grey is-size-7">
-      Comments load here once Giscus is configured.
-    </div>
-  </div>
-</section>
-
-<!-- ============================== ACKNOWLEDGMENTS ============================== -->
-<section class="section has-background-light">
-  <div class="container is-max-desktop">
-    <h2 class="title is-4 has-text-centered">Acknowledgments</h2>
-    <div class="content has-text-centered">
-      <p>The open-source MATLAB simulation code accompanying this work is available on
-        <a href="https://github.com/generible/Inverted-Pendulum-Simulator" target="_blank" rel="noopener">GitHub</a>.
-        Comments, issues, and contributions are welcome.</p>
-    </div>
+    <!-- Giscus (GitHub Discussions, Announcements category). Requires the Giscus
+         app installed on genepatrickrible/inverted-pendulum to render. -->
+    <script src="https://giscus.app/client.js"
+            data-repo="genepatrickrible/inverted-pendulum"
+            data-repo-id="R_kgDOTGRcWg"
+            data-category="Announcements"
+            data-category-id="DIC_kwDOTGRcWs4C_9IY"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
   </div>
 </section>
 
