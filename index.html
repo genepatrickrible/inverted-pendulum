@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Nonlinear Swing-Up and Stabilization of an Inverted Pendulum on a Cart</title>
+  <meta name="description" content="Energy-based swing-up using multiple Lyapunov functions, a linear down-stabilization controller for global stability, and an LQR-versus-sliding-mode comparison for the cart-pole, with an open-source MATLAB simulator.">
+  <meta name="keywords" content="inverted pendulum, cart-pole, nonlinear control, underactuated, Lyapunov, sliding mode, LQR, pole placement, PID, swing-up, stability, energy control, MATLAB simulator">
+  <meta name="author" content="Gene Patrick Rible">
+
+  <!-- Canonical URL: avoids duplicate-content splits across URL variants -->
+  <link rel="canonical" href="https://genepatrickrible.github.io/inverted-pendulum/">
+
+  <!-- Google Search Console site-verification (paste token after GSC registration) -->
+  <meta name="google-site-verification" content="GSC_TOKEN_PLACEHOLDER">
+
+  <!-- Bing Webmaster Tools site-verification (paste token after Bing registration) -->
+  <meta name="msvalidate.01" content="BING_TOKEN_PLACEHOLDER">
+
+  <!-- Google Scholar citation metadata.
+       Lets Scholar associate this page with the preprint. -->
+  <meta name="citation_title" content="Nonlinear Swing-Up and Stabilization of Inverted Pendulum on a Cart Using Energy Control Method Based on Multiple Lyapunov Functions, Sliding Mode Control, and Pole Placement">
+  <meta name="citation_author" content="Rible, Gene Patrick">
+  <meta name="citation_publication_date" content="2024/05/15">
+  <meta name="citation_journal_title" content="Preprints.org">
+  <meta name="citation_publisher" content="MDPI">
+  <meta name="citation_doi" content="10.20944/preprints202405.1003.v1">
+  <meta name="citation_abstract_html_url" content="https://doi.org/10.20944/preprints202405.1003.v1">
+  <meta name="citation_pdf_url" content="https://www.preprints.org/manuscript/202405.1003/v1/download">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:title" content="Nonlinear Swing-Up and Stabilization of an Inverted Pendulum on a Cart">
+  <meta property="og:description" content="Energy-based swing-up with multiple Lyapunov functions, a linear down-stabilization controller for global stability, and an LQR-versus-sliding-mode comparison. Open-source MATLAB simulator included.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://genepatrickrible.github.io/inverted-pendulum/">
+  <meta property="og:image" content="https://genepatrickrible.github.io/inverted-pendulum/static/images/teaser-social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A cart-pole system swinging up and balancing an inverted rod.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://genepatrickrible.github.io/inverted-pendulum/static/images/teaser-social.png">
+
+  <!-- Favicons (real hosted files; Google's crawler ignores data-URI icons) -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="static/images/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="static/images/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="static/images/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="static/images/apple-touch-icon.png">
+
+  <!-- Bulma + icon fonts via CDN (no build step) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Schema.org ScholarlyArticle JSON-LD: feeds Google's rich-result card. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Nonlinear Swing-Up and Stabilization of Inverted Pendulum on a Cart Using Energy Control Method Based on Multiple Lyapunov Functions, Sliding Mode Control, and Pole Placement",
+    "name": "Nonlinear Swing-Up and Stabilization of Inverted Pendulum on a Cart Using Energy Control Method Based on Multiple Lyapunov Functions, Sliding Mode Control, and Pole Placement",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Gene Patrick Rible",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Department of Mechanical, Aerospace and Biomedical Engineering, University of Tennessee, Knoxville"
+        }
+      }
+    ],
+    "datePublished": "2024-05-15",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MDPI (Preprints.org)"
+    },
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "DOI",
+      "value": "10.20944/preprints202405.1003.v1"
+    },
+    "sameAs": "https://github.com/generible/Inverted-Pendulum-Simulator",
+    "url": "https://genepatrickrible.github.io/inverted-pendulum/",
+    "abstract": "This work explores state-of-the-art approaches for stabilizing an inverted pendulum on a cart system. We introduce energy-based control methods and propose a simple linear controller to quickly force the system to the downward equilibrium before swing-up. By constraining the system to start from a stable equilibrium configuration, global stability is reduced to ensuring the system can follow all heteroclinic orbits that start very close to the downward equilibrium. Multiple Lyapunov functions are employed to ensure non-zero tracking, increasing the domain of attraction relative to a single Lyapunov function. The upright configuration is stabilized through pole placement using a linear quadratic regulator and through sliding mode controllers. An open-source MATLAB simulation code encapsulating the system dynamics and controller designs is provided."
+  }
+  </script>
+</head>
+<body>
+
+<!-- ============================== HERO / TITLE ============================== -->
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-2 publication-title">Nonlinear Swing-Up and Stabilization of an Inverted Pendulum on a Cart</h1>
+
+          <p class="subtitle is-5 tagline">Energy control with multiple Lyapunov functions, sliding mode control, and pole placement, plus an open-source MATLAB simulator.</p>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Gene Patrick Rible<sup>*</sup></span>
+          </div>
+
+          <div class="is-size-6 publication-affiliations">
+            <span class="affil-block">Department of Mechanical, Aerospace and Biomedical Engineering, University of Tennessee, Knoxville, TN 37916, USA</span>
+            <br>
+            <sup>*</sup>&nbsp;Corresponding author:
+            <a href="mailto:grible@vols.utk.edu">grible@vols.utk.edu</a>
+          </div>
+
+          <!-- Journal badge, clickable, links to DOI -->
+          <p class="publication-venue">
+            <a class="tag is-dark is-medium venue-link"
+               href="https://doi.org/10.20944/preprints202405.1003.v1"
+               target="_blank" rel="noopener">
+              Preprints.org&nbsp;<strong>Preprint</strong>&nbsp;2024
+            </a>
+          </p>
+
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="https://www.preprints.org/manuscript/202405.1003/v1/download" class="button is-dark is-rounded" target="_blank" rel="noopener">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper (PDF)</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://doi.org/10.20944/preprints202405.1003.v1" class="button is-dark is-rounded" target="_blank" rel="noopener">
+                <span class="icon"><i class="ai ai-doi"></i></span><span>DOI</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/generible/Inverted-Pendulum-Simulator" class="button is-dark is-rounded" target="_blank" rel="noopener">
+                <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <!-- TODO(link): replace with the YouTube playlist URL for Movies 1-5. -->
+              <a href="YOUTUBE_PLAYLIST_URL" class="button is-dark is-rounded is-placeholder-link" target="_blank" rel="noopener">
+                <span class="icon"><i class="fab fa-youtube"></i></span><span>Video</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <div class="dropdown cite-dropdown">
+                <div class="dropdown-trigger">
+                  <button class="button is-dark is-rounded" aria-haspopup="true" aria-controls="cite-menu">
+                    <span class="icon"><i class="fas fa-quote-right"></i></span>
+                    <span>Cite</span>
+                    <span class="icon is-small"><i class="fas fa-angle-down"></i></span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="cite-menu" role="menu">
+                  <div class="dropdown-content">
+                    <a href="#" class="dropdown-item" data-cite-text
+                       data-citation-text="Rible, G. P. Nonlinear Swing-Up and Stabilization of Inverted Pendulum on a Cart Using Energy Control Method Based on Multiple Lyapunov Functions, Sliding Mode Control, and Pole Placement. Preprints.org, 2024. doi:10.20944/preprints202405.1003.v1"
+                       data-citation-html="Rible, G. P. Nonlinear Swing-Up and Stabilization of Inverted Pendulum on a Cart Using Energy Control Method Based on Multiple Lyapunov Functions, Sliding Mode Control, and Pole Placement. <i>Preprints.org</i>, 2024. doi:10.20944/preprints202405.1003.v1">
+                      <span class="icon"><i class="fas fa-copy"></i></span><span class="cite-label">Copy as text</span>
+                    </a>
+                    <a href="#citation" class="dropdown-item">
+                      <span class="icon"><i class="fas fa-code"></i></span><span>BibTeX (.bib)</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div>
+
+          <!-- Engagement row: kept separate so it does not wrap with the paper buttons -->
+          <div class="publication-links engagement-links">
+            <span class="link-block">
+              <!-- TODO(link): replace with your booking-page URL (Google Appointments / Calendly / Cal.com). -->
+              <a href="BOOKING_URL_PLACEHOLDER" class="button is-dark is-rounded is-placeholder-link" target="_blank" rel="noopener">
+                <span class="icon"><i class="fas fa-calendar-check"></i></span><span>Schedule</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/genepatrickrible/inverted-pendulum/discussions" class="button is-dark is-rounded" target="_blank" rel="noopener">
+                <span class="icon"><i class="fas fa-comments"></i></span><span>Discussion</span>
+              </a>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TEASER ============================== -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <!-- TODO(media): drop the looping swing-up clip at static/images/teaser.gif
+         (a GIF or MP4 frame export works). Until then a dashed placeholder shows. -->
+    <figure class="image teaser-figure" data-file="static/images/teaser.gif">
+      <img src="static/images/teaser.gif"
+           alt="A cart-pole system swinging an inverted rod up to the vertical and balancing it."
+           onerror="this.parentNode.classList.add('fig-missing')">
+    </figure>
+    <h2 class="subtitle has-text-centered teaser-caption">
+      The rod is swung from hanging to upright by switching among energy-based Lyapunov controllers, then balanced by a linear quadratic regulator while the cart returns to the origin.
+    </h2>
+  </div>
+</section>
+
+<!-- ============================== ABSTRACT ============================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-justified">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Abstract</h2>
+        <div class="content">
+          <p>This work explores state-of-the-art approaches for stabilizing an inverted pendulum on a cart system, which has been used for over a century to demonstrate ideas in nonlinear and linear control theory, owing to its simple practical implementation yet complex system dynamics. We introduce energy-based control methods and propose a simple linear controller to quickly force the system to the downward equilibrium before swing-up. By constraining the system to start from a stable equilibrium configuration, the problem of global stability is reduced to ensuring that the system can follow all heteroclinic orbits that start very close to the downward equilibrium. Multiple Lyapunov functions are employed to ensure non-zero tracking, increasing the system's domain of attraction that is achieved by traditional controllers based on a single Lyapunov function. We stabilize our inverted pendulum system in the upright configuration through pole placement using a linear quadratic regulator known for fast settling times and smooth system response and through sliding mode controllers known for their robustness to disturbances and model uncertainties. While sliding mode controllers exhibit faster stabilization of the pendulum angle, they fail to stabilize the cart position in a reasonable amount of time. The paper concludes by suggesting various controller techniques that can enhance the swing-up and stabilization controller architectures, leaving room for future exploration. To facilitate further research and education, an open-source MATLAB simulation code is provided, encapsulating the system dynamics and controller designs. This resource offers flexibility for customization, making it a valuable tool for both researchers and educators working with inverted pendulum systems.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FIRSTS ============================== -->
+<section class="section has-background-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">What this work contributes</h2>
+    <p class="subtitle is-6 has-text-centered firsts-sub">
+      The ideas that distinguish this treatment of the cart-pole. Click a card to jump to the details.
+    </p>
+    <div class="columns is-multiline">
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-global">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-arrow-down-long fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">A down-controller that forces global stability</h3>
+            <p>A simple linear controller first drives the system to the stable downward equilibrium, so swing-up always begins from a known state and global stability follows from heteroclinic orbits.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-swingup">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-layer-group fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">Swing-up with multiple Lyapunov functions</h3>
+            <p>Switching among three Lyapunov functions keeps the tracked function nonzero except at the upright state, covering the cases where a single energy-based function stalls.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-results-rest">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-rotate fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">Upright balance in a single swing</h3>
+            <p>For a wide range of initial conditions, the switching controller brings the rod from hanging to balanced in one swing and the cart back to the origin within a few seconds.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-stabilization">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-scale-balanced fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">LQR versus sliding mode, side by side</h3>
+            <p>A like-for-like comparison: the LQR stabilizes both rod angle and cart position within about three seconds, whereas sliding mode controllers settle the angle but fail to settle the cart.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column is-half">
+        <a class="first-card-link" href="#section-techniques">
+          <div class="first-card">
+            <span class="icon has-text-info"><i class="fas fa-code fa-lg"></i></span>
+            <h3 class="is-size-5 has-text-weight-bold">An open-source MATLAB simulator</h3>
+            <p>The full system dynamics and every controller are released as customizable MATLAB code, ready for research and classroom use.</p>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== METHOD / RESULT CARDS ============================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">How it works and what we found</h2>
+
+    <!-- 1. Model -->
+    <div class="result-block" id="section-model">
+      <h3 class="title is-4">The cart-pole system and its equilibria</h3>
+      <div class="columns is-vcentered figure-pair">
+        <div class="column">
+          <figure class="image" data-file="static/images/fig1-equilibria.png">
+            <img src="static/images/fig1-equilibria.png"
+                 alt="Figure 1: upright, falling, and downward equilibrium configurations of the inverted pendulum on a cart."
+                 onerror="this.parentNode.classList.add('fig-missing')">
+          </figure>
+        </div>
+        <div class="column">
+          <figure class="image" data-file="static/images/fig2-schematic.png">
+            <img src="static/images/fig2-schematic.png"
+                 alt="Figure 2: schematic of the cart-pole with rod angle theta and cart position x driven by force F."
+                 onerror="this.parentNode.classList.add('fig-missing')">
+          </figure>
+        </div>
+      </div>
+      <p class="content">A rod of mass <i>m</i> and length <i>l</i> is pivoted on a cart of mass <i>M</i> that moves along a single axis, driven only by a horizontal force <i>F</i> on the cart. The rod angle is not directly actuated, so the system is underactuated. Because the equations of motion involve trigonometric terms in the rod angle, the system is inherently nonlinear and is not feedback linearizable, and it loses controllability once the rod swings past the horizontal. The upright position is an unstable equilibrium and the hanging position is a stable one, which is why the smallest disturbance topples the upright rod.</p>
+    </div>
+
+    <!-- 2. Swing-up -->
+    <div class="result-block" id="section-swingup">
+      <h3 class="title is-4">Energy-based swing-up with multiple Lyapunov functions</h3>
+      <div class="columns is-vcentered figure-pair">
+        <div class="column">
+          <figure class="image" data-file="static/images/fig3-energy-zero.png">
+            <img src="static/images/fig3-energy-zero.png"
+                 alt="Figure 3: the set of rod angle and angular velocity values that all produce zero mechanical energy."
+                 onerror="this.parentNode.classList.add('fig-missing')">
+          </figure>
+        </div>
+        <div class="column">
+          <figure class="image" data-file="static/images/fig4-swingup-cases.png">
+            <img src="static/images/fig4-swingup-cases.png"
+                 alt="Figure 4: the two rod configurations where a single energy-based Lyapunov function fails to decrease."
+                 onerror="this.parentNode.classList.add('fig-missing')">
+          </figure>
+        </div>
+      </div>
+      <p class="content">Swing-up drives the rod's mechanical energy toward the value it has at the upright position. A single energy-based Lyapunov function pushes that energy to zero, but infinitely many non-upright states also have zero energy (left), so the rod can settle into the wrong place. To fix this, the swing-up law switches among three Lyapunov functions chosen so that the function being tracked is zero only at the upright state and positive everywhere else. The switching specifically handles the two configurations (right) where a single function stops decreasing, which enlarges the set of initial conditions from which the rod reaches the top.</p>
+    </div>
+
+    <!-- 3. Down controller / global stability -->
+    <div class="result-block" id="section-global">
+      <h3 class="title is-4">Forcing global stability from the downward equilibrium</h3>
+      <figure class="image" data-file="static/images/fig5-phi-angle.png">
+        <img src="static/images/fig5-phi-angle.png"
+             alt="Figure 5: the rod angle phi measured from the downward equilibrium, used by the down-stabilization controller."
+             onerror="this.parentNode.classList.add('fig-missing')">
+      </figure>
+      <p class="content">If the rod angle, angular velocity, or cart position start far from equilibrium, swinging up and then settling the cart at the origin can fail or take a very long time. The proposed down-controller sidesteps this: a simple linear feedback law, designed by pole placement, first drives the rod to the stable downward equilibrium and the cart toward the origin. Because the hanging position is stable, the system reaches it reliably. From that known starting point, achieving global stability reduces to following the heteroclinic orbits that lead from the downward equilibrium up to the unstable upright one. The controller deliberately injects no energy once the rod is past horizontal, so it settles the system rather than fighting it.</p>
+    </div>
+
+    <!-- 4. Stabilization: LQR vs SMC -->
+    <div class="result-block" id="section-stabilization">
+      <h3 class="title is-4">Stabilization: LQR pole placement versus sliding mode</h3>
+      <p class="content">Once the rod is near upright, a stabilizing controller takes over. Two are compared on the same system. The linear quadratic regulator, tuned by pole placement, is known for fast settling and smooth response; it consistently brings both the rod angle and the cart position to rest within about three seconds for any initial state with the cart within 1.5 m of the origin, near-zero cart velocity, near-zero angular velocity, and a rod angle inside the upright basin. The sliding mode controllers, prized for robustness to disturbances and model error, settle the rod angle up to two seconds faster, but across every variation tried they failed to settle the cart position in a reasonable time, with the cart drift taking more than five seconds. For this system the LQR is therefore the more practical upright stabilizer.</p>
+    </div>
+
+    <!-- 5. Results: rest -->
+    <div class="result-block" id="section-results-rest">
+      <h3 class="title is-4">Result: balancing in a single swing from rest</h3>
+      <!-- TODO(video): Movies 1 and 2 (single Lyapunov and switching) for this case. -->
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE1" title="Movie 1: single Lyapunov controller, swing-up from rest"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+      <figure class="image" data-file="static/images/fig6-results-rest.png">
+        <img src="static/images/fig6-results-rest.png"
+             alt="Figure 6: input, cart force, cart position, and rod angle responses for the swing-up from rest, comparing single Lyapunov and switching controllers."
+             onerror="this.parentNode.classList.add('fig-missing')">
+      </figure>
+      <p class="content">Starting from the rod hanging at rest with the cart at the origin, the single Lyapunov and the switching controllers behave almost identically and stabilize the rod in a single swing. The panels track the controller input, the force on the cart, the cart position, and the rod angle as it climbs from hanging to upright. This one-swing behavior holds across a wide range of initial conditions, though not all of them, which motivates the switching design. The two accompanying clips show the single Lyapunov controller (Movie 1) and the switching controller (Movie 2) for this case.</p>
+    </div>
+
+    <!-- 6. Results: fast spin -->
+    <div class="result-block" id="section-results-fastspin">
+      <h3 class="title is-4">Result: recovering from a fast initial spin</h3>
+      <!-- TODO(video): Movies 3 and 4 (single Lyapunov and switching) for this case. -->
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE3" title="Movie 3: single Lyapunov controller, recovery from a fast initial spin"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+      <figure class="image" data-file="static/images/fig7-results-fastspin.png">
+        <img src="static/images/fig7-results-fastspin.png"
+             alt="Figure 7: responses when the rod starts with a large angle and a fast spin, comparing single Lyapunov and switching controllers."
+             onerror="this.parentNode.classList.add('fig-missing')">
+      </figure>
+      <p class="content">Here the rod starts at a large angle with a fast initial spin and the cart offset from the origin. The down-controller first brings the rod to the hanging position, and after a few seconds the swing-up controllers activate. The switching controller stabilizes the rod in one swing, whereas the single Lyapunov controller fails and the cart drifts away from the origin. This is the case that most clearly separates the two designs. The clips show the single Lyapunov controller (Movie 3) and the switching controller (Movie 4).</p>
+    </div>
+
+    <!-- 7. Results: far from equilibrium -->
+    <div class="result-block" id="section-results-far">
+      <h3 class="title is-4">Result: global stabilization from far-from-equilibrium states</h3>
+      <!-- TODO(video): Movie 5 (switching controller) for this case. -->
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE5" title="Movie 5: switching controller, global stabilization from a far-from-equilibrium state"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+      <figure class="image" data-file="static/images/fig8-results-far.png">
+        <img src="static/images/fig8-results-far.png"
+             alt="Figure 8: responses of the switching controller when the system starts far from any equilibrium."
+             onerror="this.parentNode.classList.add('fig-missing')">
+      </figure>
+      <p class="content">Even when the system starts far from any equilibrium, the down-controller forces it to the hanging configuration first, and the switching controller then stabilizes the rod in a single swing. This is the global-stability argument in action: by routing every initial condition through the stable downward state, the same swing-up and stabilization stack works from arbitrary starting points. The accompanying clip is Movie 5.</p>
+    </div>
+
+    <!-- 8. Techniques / architecture -->
+    <div class="result-block" id="section-techniques">
+      <h3 class="title is-4">Controller architecture and extensions</h3>
+      <figure class="image" data-file="static/images/fig9-flowchart.png">
+        <img src="static/images/fig9-flowchart.png"
+             alt="Figure 9: flowchart of the optional controller techniques, from re-initializer through conditional switchers, accelerator, bounder, and input limiter."
+             onerror="this.parentNode.classList.add('fig-missing')">
+      </figure>
+      <p class="content">The paper also lays out optional building blocks that can be layered onto the swing-up and stabilization controllers: a re-initializer that returns the system to the downward equilibrium when the cart wanders too far, an accelerator that speeds up the early swing-up phase, a bounder that keeps the cart near the origin, and an input limiter that clips spikes in the control signal. These pieces interact and have coupled effects, so they are left as tuning knobs for future work. The complete dynamics and every controller in this diagram are implemented in the open-source MATLAB simulator, so each block can be switched on, tuned, and studied directly.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================== SUPPLEMENTARY VIDEOS ============================== -->
+<section class="section has-background-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Supplementary videos</h2>
+    <p class="subtitle is-6 has-text-centered firsts-sub">
+      Animations of the simulated cart-pole under each controller and initial condition.
+      <!-- TODO(video): replace each YOUTUBE_ID_MOVIEn with the 11-character YouTube ID. -->
+    </p>
+    <div class="columns is-multiline">
+
+      <div class="column is-half">
+        <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 1: swing-up from rest, single Lyapunov</h3>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE1" title="Movie 1"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+        <p class="has-text-centered is-size-7">Rod hanging at rest, single Lyapunov controller.</p>
+      </div>
+
+      <div class="column is-half">
+        <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 2: swing-up from rest, switching</h3>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE2" title="Movie 2"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+        <p class="has-text-centered is-size-7">Rod hanging at rest, Lyapunov switching controller.</p>
+      </div>
+
+      <div class="column is-half">
+        <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 3: fast initial spin, single Lyapunov</h3>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE3" title="Movie 3"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+        <p class="has-text-centered is-size-7">Large angle and fast spin, single Lyapunov controller (drifts).</p>
+      </div>
+
+      <div class="column is-half">
+        <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 4: fast initial spin, switching</h3>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE4" title="Movie 4"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+        <p class="has-text-centered is-size-7">Large angle and fast spin, switching controller (one swing).</p>
+      </div>
+
+      <div class="column is-half is-offset-one-quarter">
+        <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 5: far-from-equilibrium, switching</h3>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_MOVIE5" title="Movie 5"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+        <p class="has-text-centered is-size-7">Far-from-equilibrium start, switching controller.</p>
+      </div>
+
+    </div>
+    <p class="has-text-centered">
+      <!-- TODO(link): replace with the YouTube playlist URL for Movies 1-5. -->
+      <a href="YOUTUBE_PLAYLIST_URL" target="_blank" rel="noopener">Watch all five as a playlist</a>
+    </p>
+  </div>
+</section>
+
+<!-- ============================== BIBTEX ============================== -->
+<section class="section" id="citation">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Citation</h2>
+    <div class="content">
+      <pre class="bibtex"><code>@article{rible2024nonlinear,
+  title   = {Nonlinear Swing-Up and Stabilization of Inverted Pendulum on a Cart
+             Using Energy Control Method Based on Multiple Lyapunov Functions,
+             Sliding Mode Control, and Pole Placement},
+  author  = {Rible, Gene Patrick},
+  journal = {Preprints.org},
+  year    = {2024},
+  month   = {May},
+  doi     = {10.20944/preprints202405.1003.v1},
+  url     = {https://doi.org/10.20944/preprints202405.1003.v1},
+  publisher = {MDPI},
+  note    = {Preprint}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== DISCUSSION ============================== -->
+<section class="section" id="discussion">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Discussion</h2>
+    <p class="subtitle is-6 has-text-centered firsts-sub">
+      Questions, comments, and follow-up work in the control and robotics community. Sign in with GitHub to post.
+    </p>
+    <!-- TODO(giscus): configure at https://giscus.app for the genepatrickrible/inverted-pendulum repo
+         (enable Discussions on the repo, install the Giscus app, category = Announcements),
+         then paste the generated <script src="https://giscus.app/client.js" ...> block here.
+         Keep data-loading="lazy" since this widget sits near the bottom of the page. -->
+    <div class="has-text-centered has-text-grey is-size-7">
+      Comments load here once Giscus is configured.
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ACKNOWLEDGMENTS ============================== -->
+<section class="section has-background-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4 has-text-centered">Acknowledgments</h2>
+    <div class="content has-text-centered">
+      <p>The open-source MATLAB simulation code accompanying this work is available on
+        <a href="https://github.com/generible/Inverted-Pendulum-Simulator" target="_blank" rel="noopener">GitHub</a>.
+        Comments, issues, and contributions are welcome.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="footer">
+  <div class="container is-max-desktop has-text-centered">
+    <p class="is-size-7">
+      <a href="https://github.com/genepatrickrible/inverted-pendulum" target="_blank" rel="noopener">Source for this page</a>
+      &nbsp;&middot;&nbsp;
+      Website template borrowed from
+      <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>,
+      used under a
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC&nbsp;BY-SA&nbsp;4.0</a> license.
+    </p>
+  </div>
+</footer>
+
+<script src="static/js/index.js" defer></script>
+</body>
+</html>

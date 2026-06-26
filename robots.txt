@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://genepatrickrible.github.io/inverted-pendulum/sitemap.xml
