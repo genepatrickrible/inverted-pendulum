@@ -64,7 +64,7 @@ python3 -m http.server 8000
 
 | Button | Destination |
 | ------ | ----------- |
-| Paper (PDF) | https://www.preprints.org/manuscript/202405.1003/v1/download |
+| Paper (PDF) | https://www.preprints.org/frontend/manuscript/01958f58736242b038e4ed3f64899d48/download_pub |
 | DOI | https://doi.org/10.20944/preprints202405.1003.v1 |
 | Code | https://github.com/generible/Inverted-Pendulum-Simulator |
 | Video | YouTube playlist: **TODO**, search `YOUTUBE_PLAYLIST_URL` in index.html |
