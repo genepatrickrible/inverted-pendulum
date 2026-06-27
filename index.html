@@ -139,7 +139,7 @@
             </span>
             <span class="link-block">
               <!-- TODO(link): replace with the YouTube playlist URL for Movies 1-5. -->
-              <a href="YOUTUBE_PLAYLIST_URL" class="button is-dark is-rounded is-placeholder-link" target="_blank" rel="noopener">
+              <a href="https://www.youtube.com/playlist?list=PLNvqWtg9LbAg" class="button is-dark is-rounded" target="_blank" rel="noopener">
                 <span class="icon"><i class="fab fa-youtube"></i></span><span>Video</span>
               </a>
             </span>
@@ -191,15 +191,14 @@
 <!-- ============================== TEASER ============================== -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
-    <!-- TODO(media): drop the looping swing-up clip at static/images/teaser.gif
-         (a GIF or MP4 frame export works). Until then a dashed placeholder shows. -->
-    <figure class="image teaser-figure" data-file="Hero teaser clip → static/images/teaser.gif">
-      <img src="static/images/teaser.gif"
-           alt="A cart-pole system swinging an inverted rod up to the vertical and balancing it."
-           onerror="this.parentNode.classList.add('fig-missing')">
-    </figure>
+    <!-- Hero teaser: Movie 1 (swing-up from rest), looping silently. -->
+    <video class="teaser-video" autoplay muted loop playsinline preload="metadata"
+           aria-label="Cart-pole swinging the rod up from hanging to upright and balancing it while the cart returns to the origin.">
+      <source src="static/videos/teaser.mp4" type="video/mp4">
+      Your browser does not support embedded video.
+    </video>
     <h2 class="subtitle has-text-centered teaser-caption">
-      The rod is swung from hanging to upright by switching among energy-based Lyapunov controllers, then balanced by a linear quadratic regulator while the cart returns to the origin.
+      Starting from the rod hanging at rest, the controller swings it up and balances it upright while the cart returns to the origin.
     </h2>
   </div>
 </section>
@@ -348,7 +347,11 @@
     <div class="result-block" id="section-results-rest">
       <h3 class="title is-4">Result: balancing in a single swing from rest</h3>
       <!-- TODO(video): Movies 1 and 2 (single Lyapunov and switching) for this case. -->
-      <div class="video-embed video-placeholder" data-movie="Movie 1: paste YouTube ID (YOUTUBE_ID_MOVIE1)"></div>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/YaZo816WG9s" title="Movie 1"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
       <figure class="image" data-file="Preprint Fig. 6 → static/images/fig6-results-rest.png">
         <img src="static/images/fig6-results-rest.png"
              alt="Figure 6: input, cart force, cart position, and rod angle responses for the swing-up from rest, comparing single Lyapunov and switching controllers."
@@ -361,7 +364,11 @@
     <div class="result-block" id="section-results-fastspin">
       <h3 class="title is-4">Result: recovering from a fast initial spin</h3>
       <!-- TODO(video): Movies 3 and 4 (single Lyapunov and switching) for this case. -->
-      <div class="video-embed video-placeholder" data-movie="Movie 3: paste YouTube ID (YOUTUBE_ID_MOVIE3)"></div>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/Npvfv3Pi4Pc" title="Movie 3"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
       <figure class="image" data-file="Preprint Fig. 7 → static/images/fig7-results-fastspin.png">
         <img src="static/images/fig7-results-fastspin.png"
              alt="Figure 7: responses when the rod starts with a large angle and a fast spin, comparing single Lyapunov and switching controllers."
@@ -374,7 +381,11 @@
     <div class="result-block" id="section-results-far">
       <h3 class="title is-4">Result: global stabilization from far-from-equilibrium states</h3>
       <!-- TODO(video): Movie 5 (switching controller) for this case. -->
-      <div class="video-embed video-placeholder" data-movie="Movie 5: paste YouTube ID (YOUTUBE_ID_MOVIE5)"></div>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/NO4jBwVFR0A" title="Movie 5"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
       <figure class="image" data-file="Preprint Fig. 8 → static/images/fig8-results-far.png">
         <img src="static/images/fig8-results-far.png"
              alt="Figure 8: responses of the switching controller when the system starts far from any equilibrium."
@@ -403,44 +414,63 @@
     <h2 class="title is-3 has-text-centered">Supplementary videos</h2>
     <p class="subtitle is-6 has-text-centered firsts-sub">
       Animations of the simulated cart-pole under each controller and initial condition
-      <!-- TODO(video): replace each YOUTUBE_ID_MOVIEn with the 11-character YouTube ID. -->
     </p>
     <div class="columns is-multiline">
 
       <div class="column is-half">
         <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 1: swing-up from rest, single Lyapunov</h3>
-        <div class="video-embed video-placeholder" data-movie="Movie 1: paste YouTube ID (YOUTUBE_ID_MOVIE1)"></div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/YaZo816WG9s" title="Movie 1"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
         <p class="has-text-centered is-size-7">Rod hanging at rest, single Lyapunov controller.</p>
       </div>
 
       <div class="column is-half">
         <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 2: swing-up from rest, switching</h3>
-        <div class="video-embed video-placeholder" data-movie="Movie 2: paste YouTube ID (YOUTUBE_ID_MOVIE2)"></div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/5VFqun9BzXI" title="Movie 2"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
         <p class="has-text-centered is-size-7">Rod hanging at rest, Lyapunov switching controller.</p>
       </div>
 
       <div class="column is-half">
         <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 3: fast initial spin, single Lyapunov</h3>
-        <div class="video-embed video-placeholder" data-movie="Movie 3: paste YouTube ID (YOUTUBE_ID_MOVIE3)"></div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/Npvfv3Pi4Pc" title="Movie 3"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
         <p class="has-text-centered is-size-7">Large angle and fast spin, single Lyapunov controller (drifts).</p>
       </div>
 
       <div class="column is-half">
         <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 4: fast initial spin, switching</h3>
-        <div class="video-embed video-placeholder" data-movie="Movie 4: paste YouTube ID (YOUTUBE_ID_MOVIE4)"></div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/SAPzmkMMk18" title="Movie 4"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
         <p class="has-text-centered is-size-7">Large angle and fast spin, switching controller (one swing).</p>
       </div>
 
       <div class="column is-half is-offset-one-quarter">
         <h3 class="is-size-5 has-text-weight-bold has-text-centered">Movie 5: far-from-equilibrium, switching</h3>
-        <div class="video-embed video-placeholder" data-movie="Movie 5: paste YouTube ID (YOUTUBE_ID_MOVIE5)"></div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/NO4jBwVFR0A" title="Movie 5"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
         <p class="has-text-centered is-size-7">Far-from-equilibrium start, switching controller.</p>
       </div>
 
     </div>
     <p class="has-text-centered">
       <!-- TODO(link): replace with the YouTube playlist URL for Movies 1-5. -->
-      <a href="YOUTUBE_PLAYLIST_URL" target="_blank" rel="noopener">Watch all five as a playlist</a>
+      <a href="https://www.youtube.com/playlist?list=PLNvqWtg9LbAg" target="_blank" rel="noopener">Watch all five as a playlist</a>
     </p>
   </div>
 </section>
