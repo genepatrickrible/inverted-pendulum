@@ -67,18 +67,19 @@ python3 -m http.server 8000
 | Paper (PDF) | https://www.preprints.org/frontend/manuscript/01958f58736242b038e4ed3f64899d48/download_pub |
 | DOI | https://doi.org/10.20944/preprints202405.1003.v1 |
 | Code | https://github.com/generible/Inverted-Pendulum-Simulator |
-| Video | YouTube playlist: **TODO**, search `YOUTUBE_PLAYLIST_URL` in index.html |
+| Video | https://www.youtube.com/playlist?list=PLNvqWtg9LbAg |
 | Schedule | https://calendar.app.google/YsaGA9uHTuNJpuD77 |
 | Discussion | https://github.com/genepatrickrible/inverted-pendulum/discussions |
 
 ## Integrations
 
-- **YouTube movies:** the five supplementary clips embed via
-  `https://www.youtube.com/embed/YOUTUBE_ID_MOVIE{1..5}`. Replace each
-  `YOUTUBE_ID_MOVIE{n}` token (appears once inline in a result block and once in
-  the supplementary-videos grid) with the 11-character video ID. Upload the
-  videos **Public** (not Unlisted) so Scholar and video crawlers index them, and
-  set `YOUTUBE_PLAYLIST_URL` (two places) to the public playlist.
+- **YouTube movies (wired):** Movie 1 `YaZo816WG9s`, Movie 2 `5VFqun9BzXI`,
+  Movie 3 `Npvfv3Pi4Pc`, Movie 4 `SAPzmkMMk18`, Movie 5 `NO4jBwVFR0A`. Playlist
+  `https://www.youtube.com/playlist?list=PLNvqWtg9LbAg`. Each ID appears once
+  inline in a result block and once in the supplementary-videos grid.
+- **Hero teaser (wired):** local looping silent clip at `static/videos/teaser.mp4`
+  (sanitized from Movie 1, swing-up from rest). Rendered at native aspect via the
+  `.teaser-video` rule.
 - **Schedule button:** points at the Google Calendar Appointment Scheduling page
   `https://calendar.app.google/YsaGA9uHTuNJpuD77` (same booking link as the
   fur-wetting and quadcopter-failsafe pages).
